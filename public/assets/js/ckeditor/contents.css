@@ -1,0 +1,196 @@
+/*
+Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+body
+{
+    /* Font */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+
+    /* Text color */
+    color: #333;
+
+    /* Remove the background color to make it transparent */
+    background-color: #fff;
+
+    margin: 20px;
+}
+
+.cke_editable
+{
+    font-size: 14px;
+    line-height: 1.6;
+
+    /* Fix for missing scrollbars with RTL texts. (#10488) */
+    word-wrap: break-word;
+}
+
+blockquote
+{
+    font-style: italic;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    padding: 2px 0;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0;
+}
+
+.cke_contents_ltr blockquote
+{
+    padding-left: 20px;
+    padding-right: 8px;
+    border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote
+{
+    padding-left: 8px;
+    padding-right: 20px;
+    border-right-width: 5px;
+}
+
+a
+{
+    color: #337ab7;
+    text-decoration: none;
+}
+
+ol,ul,dl
+{
+    /* IE7: reset rtl list margin. (#7334) */
+    *margin-right: 0px;
+    /* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+    padding: 0 40px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+hr
+{
+    border: 0px;
+    border-top: 1px solid #ccc;
+}
+
+img.right
+{
+    border: 1px solid #ccc;
+    float: right;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+img.left
+{
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+pre
+{
+    white-space: pre-wrap; /* CSS 2.1 */
+    word-wrap: break-word; /* IE7 */
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+
+.marker
+{
+    background-color: Yellow;
+}
+
+span[lang]
+{
+    font-style: italic;
+}
+
+figure
+{
+    text-align: center;
+    border: solid 1px #ccc;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.05);
+    padding: 10px;
+    margin: 10px 20px;
+    display: inline-block;
+}
+
+figure > figcaption
+{
+    text-align: center;
+    display: block; /* For IE8 */
+}
+
+a > img {
+    padding: 1px;
+    margin: 1px;
+    border: none;
+    outline: 1px solid #0782C1;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+h1 small,h2 small,h3 small,h4 small,h5 small,h6 small {
+    font-weight: normal;
+    line-height: 1;
+    color: #777;
+}
+h1,h2,h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h1 small,h2 small,h3 small {
+    font-size: 65%;
+}
+h4,h5,h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+h4 small,h5 small,h6 small {
+    font-size: 75%;
+}
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 30px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 18px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 12px;
+}
+p {
+    margin: 0 0 10px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.download {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAIAAACp9tltAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAqElEQVQokWP8//8/AwyETzp69+VnOFdZnHdlnjWcy8RANBhwpSxP3n279OgDhPP5x29kOSB324VnELaenADj7z//ypadP3TjFR7z7DTEuqIMmViYGYEUkINfHVAZyK14VMPVAdlQb2FVjawOoRRTNZo6IECJWCD48/c/0JdABpo6LEohqiGWoIljUYoLsEzbfXvDmScE1QWYyLB8+/Xn3ZefBJV++/UHAFEmTLK7GpMVAAAAAElFTkSuQmCC) no-repeat center right;
+    border: 1px dashed #ccc;
+    display: block;
+}
