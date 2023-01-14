@@ -14,6 +14,7 @@ function ToolBar() {
     };
     self.form_init = function (form) {
         self.form_data = form;
+        $('.selectpicker').selectpicker();
     };
     self.grid = function (attr, param) {
         return self.grid_data[attr](param);
@@ -21,18 +22,20 @@ function ToolBar() {
 
     self.add = function (e) {
         self.form_data.method('add');
-        self.form_data.current({});
+        self.form_data.current({active: 1});
         self.view('form');
     };
 
     self.edit = function (e) {
         self.form_data.method('update');
         self.form_data.current(e);
+        $('#stadium_id').selectpicker('val', e.stadium_id);
         self.view('form');
     };
 
     self.prepare_save = function(){
-    	self.form_data.current().has_complete        = self.form_data.current().has_complete == true ? 1 : 0;
+        self.form_data.current().active = self.form_data.current().active == true ? 1 : 0;
+        self.form_data.current().stadium_id = $('#stadium_id').selectpicker('val');
     };
 
     self.saved = function () {
@@ -40,29 +43,20 @@ function ToolBar() {
     };
 
     self.cellsrenderer = {
-    	contact_name: function(data){
-    		var text = '';
-    		text += 'Tên: <strong class="text-blue">'+data.contact_name+'</strong>';
-    		text += '<br/>+ SĐT: <strong class="text-purple">'+data.contact_phone+'</strong>';
-    		if (data.contact_email)
-    			text += '<br/>+ Email: <strong class="text-green">'+data.contact_email+'</strong>';
-    		if (data.contact_address)
-    			text += '<br/>+ Địa chỉ: <strong>'+data.contact_address+'</strong>';
-    		return text;
-    	},
-        has_complete: function(data){
-        	return data.has_complete === 0 ? '<span class="label label-default">Đang chờ</span>' : '<span class="label label-success">Đã trả lời</span>';
+        stadium_id: (e)=>e.stadium_info?.name,
+        active: function(data){
+            return data.active === 0 ? '<span class="label label-default">Không hoạt động</span>' : '<span class="label label-success">Hoạt động</span>';
         }
     };
 }
 var toolbar = new ToolBar();
 </script>
 <grid params="cols: {
-        contact_name: 'Học viên đăng ký',
-        content: 'Nội dung',
-        has_complete: 'Trạng thái',
+        name: 'Tên sân',
+        stadium_id: 'nhà thi đấu',
+        active: 'Trạng thái',
     },
-    sorts: ['contact_name', 'has_complete'],
+    sorts: ['name', 'stadium_id'],
     url: '{{ uri() }}',
     token: '{{ csrf_token() }}',
     buttons: ['add', 'edit', 'delete'],
@@ -96,6 +90,6 @@ var toolbar = new ToolBar();
     callback: toolbar.form_init" data-bind="visible: toolbar.view() === 'form'"></edit-form>
 
 <script type="text/html" id="edit-form">
-@include('admin.forms.ward')
+@include('admin.forms.court')
 </script>
 @endsection

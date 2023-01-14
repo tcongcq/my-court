@@ -3,72 +3,69 @@
 @section('main')
 @include('admin.blocks.hide_nav_menu')
 <script type="text/javascript">
-    function ToolBar() {
-        var self = this;
-        self.view = ko.observable('grid');
-        self.grid_data = null;
-        self.form_data = null;
+function ToolBar() {
+    var self = this;
+    self.view = ko.observable('grid');
+    self.grid_data = null;
+    self.form_data = null;
 
-        self.grid_init = function (grid) {
-            self.grid_data = grid;
-        };
-        self.form_init = function (form) {
-            self.form_data = form;
-        };
-        self.grid = function (attr, param) {
-            return self.grid_data[attr](param);
-        };
+    self.grid_init = function (grid) {
+        self.grid_data = grid;
+    };
+    self.form_init = function (form) {
+        self.form_data = form;
+    };
+    self.grid = function (attr, param) {
+        return self.grid_data[attr](param);
+    };
 
-        self.add = function (e) {
-            self.form_data.method('add');
-            self.form_data.current({});
-            self.view('form');
-        };
+    self.add = function (e) {
+        self.form_data.method('add');
+        self.form_data.current({active: 1});
+        self.view('form');
+    };
 
-        self.edit = function (e) {
-            self.form_data.method('update');
-            self.form_data.current(e);
-            self.view('form');
-        };
+    self.edit = function (e) {
+        self.form_data.method('update');
+        self.form_data.current(e);
+        self.view('form');
+    };
 
-        function ymdFormat(dateStr){
-            var day = dateStr['0']+dateStr['1'];
-            var month = dateStr['3']+dateStr['4'];
-            var year = dateStr['6']+dateStr['7']+dateStr['8']+dateStr['9'];
-            return month+'/'+day+'/'+year;
-        };
+    self.prepare_save = function(){
+        self.form_data.current().active = self.form_data.current().active == true ? 1 : 0;
+    };
 
-        self.prepare_save = function(){
-            //
-        };
+    self.saved = function () {
+        self.grid_data.fetch();
+    };
 
-        self.saved = function () {
-            self.grid_data.fetch();
-        };
-
-        self.cellsrenderer = {
-            active: function (data) {
-                return data.active === 0 ? '<span class="label label-default">Khoá</span>' : '<span class="label label-success">Kích hoạt</span>';
-            }
-
-        };
-
-    }
-    var toolbar = new ToolBar();
+    self.cellsrenderer = {
+        active: function(data){
+            return data.active === 0 ? '<span class="label label-default">Không hoạt động</span>' : '<span class="label label-success">Hoạt động</span>';
+        }
+    };
+}
+var toolbar = new ToolBar();
 </script>
 <grid params="cols: {
-        name: 'Tên công việc',
+        name: 'Khách hàng',
+        phone: 'SĐT',
+        classify: 'Nhóm',
         active: 'Trạng thái',
-        note: 'Ghi chú'
     },
-    sorts: ['name', 'active', 'note'],
+    sorts: ['name', 'phone', 'classify'],
     url: '{{ uri() }}',
     token: '{{ csrf_token() }}',
-    buttons: ['edit','add','delete'],
+    buttons: ['add', 'edit', 'delete'],
     cellsrenderer: toolbar.cellsrenderer,
     add: toolbar.add,
     edit: toolbar.edit,
     callback: toolbar.grid_init,
+    filters: [
+    @if(\Request::has('id'))
+        {key:'id',value:[{{ \Request::get('id') }}]},
+    @endif
+    ],
     trans: {
         data_empty_label: 'Không có dữ liệu',
         add: 'Thêm',
@@ -87,10 +84,9 @@
     prepare_save: toolbar.prepare_save,
     saved: toolbar.saved,
     template: 'edit-form',
-    toolbar: { btnSaveAndNew: false },
     callback: toolbar.form_init" data-bind="visible: toolbar.view() === 'form'"></edit-form>
 
 <script type="text/html" id="edit-form">
-    @include('admin.forms.customer')
+@include('admin.forms.customer')
 </script>
 @endsection

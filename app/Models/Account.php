@@ -8,28 +8,61 @@ class Account extends User {
 
     protected static $info = null;
     protected $fillable = [
-        'account_info',
-        'account_info_id',
+        'fullname',
         'username',
         'password',
+        'avatar',
         'remember_token',
-        'active',
-        'last_login',
+        'token_login',
+        'device_token',
         'login_backend',
         'login_frontend',
+        'gender',
+        'birthday',
+        'phone',
+        'email',
+        'address',
+        'active',
+        'locked',
+        'attribs',
+        'last_login',
         'protected',
         'anonymous',
+        'user_group_id',
+        'type_user',
+        'expiry_date',
+        'note'
     ];
-    public $rules = [];
-    protected $hidden = [
-        'password', 'remember_token',
+    public $rules = [
+        'fullname'              => 'required',
+        'username'              => 'required|unique:users,username',
+        'password'              => 'required|min:4|confirmed',
+        'avatar'                => '',
+        'remember_token'        => '',
+        'token_login'           => '',
+        'device_token'          => '',
+        'login_backend'         => 'required',
+        'login_frontend'        => 'required',
+        'gender'                => '',
+        'birthday'              => '',
+        'phone'                 => /*'required|regex:/^[0]{1}[189]{1}[0-9]{8,9}$/|unique:users,phone'*/'',
+        'email'                 => 'required|email|unique:users,email',
+        'address'               => '',
+        'active'                => 'required',
+        'locked'                => '',
+        'attribs'               => '',
+        'last_login'            => '',
+        'protected'             => '',
+        'anonymous'             => '',
+        'user_group_id'         => '',
+        'type_user'             => '',
+        'expiry_date'           => '',
+        'note'                  => ''
     ];
+    protected $hidden = ['password', 'remember_token'];
 
     public static function get_info() {
-        if (self::$info === null) {
-            self::$info = \DB::table(\Auth::user()->account_info)->where('id', \Auth::user()->account_info_id)->first();
-        }
-        return self::$info;
+        return \Auth::user();
     }
     
     // check permission

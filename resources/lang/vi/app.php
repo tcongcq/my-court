@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'     => 'InnoSoft CMS',
+    'title'     => 'MyCourt Management',
     
     'dashboard' => 'Dashboard',
 ];

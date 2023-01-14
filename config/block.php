@@ -57,10 +57,6 @@ return [
             ],
         ],
         'court-management' => [
-            'playtime-pricing' => [
-                'icon' => 'glyphicon glyphicon-dashboard',
-                'ctrl' => '\App\Http\Controllers\Admin\PlaytimePricingController'
-            ],
             'court' => [
                 'icon' => 'glyphicon glyphicon-dashboard',
                 'ctrl' => '\App\Http\Controllers\Admin\CourtController'
@@ -68,6 +64,10 @@ return [
             'stadium' => [
                 'icon' => 'glyphicon glyphicon-dashboard',
                 'ctrl' => '\App\Http\Controllers\Admin\StadiumController'
+            ],
+            'playtime-pricing' => [
+                'icon' => 'glyphicon glyphicon-dashboard',
+                'ctrl' => '\App\Http\Controllers\Admin\PlaytimePricingController'
             ],
         ],
         'customer-management' => [
