@@ -65,7 +65,7 @@ class TimeRentalCalculate
         foreach ($this->sort_by($this->rentalPrices) as $k => $rp){
             if ($this->has_overlap($rp->{$this->StartTime}, $rp->{$this->FinishTime})){
                 array_push($matchTime, $rp);
-                error_log(json_encode($rp));
+                // error_log(json_encode($rp));
             }
         }
         $matchTime = $this->sort_by($matchTime);
@@ -85,8 +85,8 @@ class TimeRentalCalculate
                 'price'         => $paidAmount
             ]);
             $totalAmount += $paidAmount;
-            error_log(json_encode([$timeDiff->format('%h hour'), $timeDiff->format('%i min'), $timeDiff->format('%s second')]));
-            error_log(json_encode('$ '.$paidAmount));
+            // error_log(json_encode([$timeDiff->format('%h hour'), $timeDiff->format('%i min'), $timeDiff->format('%s second')]));
+            // error_log(json_encode('$ '.$paidAmount));
         }
         return ['rental_prices' => $rentalPrice, 'total_amount' => $totalAmount];
     }

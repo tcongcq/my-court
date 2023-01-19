@@ -20,9 +20,24 @@
             <input type="text" class="form-control" name="name" id="name" data-bind="value: current().name" placeholder="Tên khung giờ..." required>
         </div>
         <div class="form-group">
+            <label for="stadium_id" class="control-label">Nhà thi đấu</label>
+            <select type="text" class="form-control selectpicker" data-live-search="true" name="stadium_id" id="stadium_id" data-bind="value: current().stadium_id" placeholder="Nhà thi đấu..." required>
+                @foreach($stadia as $idx => $stadium)
+                <option value="{{ $stadium->id }}">{{$idx+1}}. {{ $stadium->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="price_per_hour" class="control-label">Giá mỗi giờ</label>
             <div class="input-group">
                 <input type="text" class="form-control inputmask" name="price_per_hour" id="price_per_hour" data-bind="value: current().price_per_hour" placeholder="Giá mỗi giờ..." />
+                <span class="input-group-addon">VNĐ</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price_per_hour_loyal" class="control-label">Giá mỗi giờ (cố định)</label>
+            <div class="input-group">
+                <input type="text" class="form-control inputmask" name="price_per_hour_loyal" id="price_per_hour_loyal" data-bind="value: current().price_per_hour_loyal" placeholder="Giá mỗi giờ (cố định)..." />
                 <span class="input-group-addon">VNĐ</span>
             </div>
         </div>

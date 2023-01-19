@@ -23,6 +23,7 @@ function ToolBar() {
             format: 'HH:mm',
             stepping: 15
         });
+        $('.selectpicker').selectpicker();
     };
     self.grid = function (attr, param) {
         return self.grid_data[attr](param);
@@ -30,7 +31,7 @@ function ToolBar() {
 
     self.add = function (e) {
         self.form_data.method('add');
-        self.form_data.current({active: 1, price_per_hour: 0});
+        self.form_data.current({active: 1, price_per_hour: 0, price_per_hour_loyal: 0});
         self.view('form');
     };
 
@@ -43,11 +44,12 @@ function ToolBar() {
     };
 
     self.prepare_save = function(){
-        let inputMaskIds = ['price_per_hour'];
+        let inputMaskIds = ['price_per_hour','price_per_hour_loyal'];
         inputMaskIds.forEach((id, idx)=>{self.form_data.current()[id] = $('#'+id).val().replace(/#|,/g,'')});
         self.form_data.current().active = self.form_data.current().active == true ? 1 : 0;
         self.form_data.current().start_time = $("#start_time").find("input").val();
         self.form_data.current().end_time 	= $("#end_time").find("input").val();
+        self.form_data.current().stadium_id = $('#stadium_id').selectpicker('val');
     };
 
     self.saved = function () {

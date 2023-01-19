@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use InnoSoft\CMS\API;
+use App\Models\Stadium;
 use App\Models\PlaytimePricing;
 
 class PlaytimePricingController extends API
@@ -15,6 +16,12 @@ class PlaytimePricingController extends API
 
     protected function prepare_index(){
         return $this->M->where('id', '>', 1);
+    }
+
+    public function getIndex(){
+        return view($this->view, [
+            "stadia" => Stadium::where('id', '>', 1)->get()
+        ]);
     }
 
     protected function prepare_add(){

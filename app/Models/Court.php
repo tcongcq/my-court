@@ -27,4 +27,18 @@ class Court extends Model
     ];
 
     public $timestamps = true;
+
+    public static function get_current_info($_id){
+        $row = self::find($_id);
+        $row->stadium_info = Stadium::find($row->stadium_id);
+        return $row;
+    }
+
+    public static function get_avail_court(){
+        $rows = self::where('id', '>', 1)->get();
+        foreach ($rows as $key => $row){
+            $row->stadium_info = Stadium::find($row->stadium_id);
+        }
+        return $rows;
+    }
 }
